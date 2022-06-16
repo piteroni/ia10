@@ -5,14 +5,22 @@ import "rc-slider/assets/index.css";
 
 import { FC, useEffect, useRef, useState } from "react";
 
-type ApiResponse = Array<{
+type WorkData = {
   name: string;
   thumbnailURI: string;
   audioURI: string;
-}>;
+};
+
+const initialState: WorkData = {
+  name: "",
+  thumbnailURI: "",
+  audioURI: "",
+};
+
+type ApiResponse = WorkData[];
 
 const Works: NextPage<{ works: ApiResponse }> = ({ works }) => {
-  const [audioURI, setAudioURI] = useState("");
+  const [work, setWork] = useState<WorkData>({ ...initialState });
 
   return (
     <div
@@ -26,7 +34,7 @@ const Works: NextPage<{ works: ApiResponse }> = ({ works }) => {
               key={work.name}
               className="mb-10 mx-8"
               style={{ cursor: "pointer" }}
-              onClick={() => setAudioURI(work.audioURI)}
+              onClick={() => setWork(work)}
             >
               <img
                 width="250px"
@@ -43,14 +51,21 @@ const Works: NextPage<{ works: ApiResponse }> = ({ works }) => {
           );
         })}
 
-      <Player audioURI={audioURI} />
+      <Player
+        title={work.name}
+        audioURI={work.audioURI}
+        thumbnailURI={work.thumbnailURI}
+      />
     </div>
   );
 };
 
+// こいつはスタイルの調整にとことん弱い
 const Player: FC<{
+  title: string;
+  thumbnailURI: string;
   audioURI: string;
-}> = ({ audioURI }) => {
+}> = ({ audioURI, title, thumbnailURI }) => {
   const [isPlay, setIsPlay] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -107,6 +122,12 @@ const Player: FC<{
       return;
     }
 
+    if (volume > 0) {
+      setIsMute(false);
+    } else {
+      setIsMute(true);
+    }
+
     audio.current.volume = volume;
   }, [volume]);
 
@@ -127,14 +148,18 @@ const Player: FC<{
 
     setMarks({
       0: {
-        style: { left: "4%" },
+        style: { left: "5.5%" },
         label: format(currentTime),
       },
       [duration]: {
-        style: { left: "94.5%" },
+        style: { left: "93.2%" },
         label: "-" + format(remaining),
       },
     });
+
+    if (Math.round(currentTime) === Math.round(duration)) {
+      setIsPlay(false);
+    }
   }, [currentTime]);
 
   const playAudio = async (audioURI: string) => {
@@ -182,7 +207,7 @@ const Player: FC<{
       <div
         style={{
           width: "460px",
-          padding: "30px 30px 20px 40px",
+          padding: "25px 30px 25px 40px",
           borderRadius: "10px",
           position: "absolute",
           right: "50px",
@@ -191,6 +216,23 @@ const Player: FC<{
             "rgba(255, 255, 255, 0.2) 0px 0px 7px, rgba(255, 255, 255, 0.15) 0px 1px 3px 1px",
         }}
       >
+        <div className="mb-4 flex items-center">
+          <img
+            width="72px"
+            height="72px"
+            className="mr-4"
+            src={thumbnailURI}
+            alt={title}
+            style={{
+              border: "white 2px solid",
+              borderRadius: "5px",
+            }}
+          />
+          <div className="font-bold" style={{ color: "white" }}>
+            {title}
+          </div>
+        </div>
+
         <div className="flex justify-center items-center">
           <Slider
             className="mr-8 mb-6"
@@ -255,9 +297,9 @@ const Player: FC<{
               }}
               style={{
                 position: "absolute",
-                top: "-80px",
-                right: "55px",
-                height: "120px",
+                top: "25px",
+                right: "65px",
+                height: "90px",
                 width: "35px",
               }}
             />
@@ -267,9 +309,9 @@ const Player: FC<{
               <div
                 style={{
                   position: "absolute",
-                  height: "100px",
-                  top: "-90px",
-                  right: "60px",
+                  top: "20px",
+                  right: "70px",
+                  height: "90px",
                   padding: "5px",
                   borderRadius: "7px",
                   backgroundColor: "black",
