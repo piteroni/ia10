@@ -84,10 +84,7 @@ const Player: FC<{
       return;
     }
 
-    hls.current = new Hls();
-    hls.current.on(Events.ERROR, (_, err: ErrorData) => {
-      console.error(err);
-    });
+    hls.current = newHls();
 
     return () => {
       hls.current?.destroy();
@@ -185,9 +182,15 @@ const Player: FC<{
     if (hls.current.media) {
       hls.current.stopLoad();
       hls.current.detachMedia();
+
+      new Promise<void>((resolve) => {
+        hls.current!.destroy();
+        resolve();
+      });
     }
 
-    hls.current.attachMedia(audio.current!);
+    hls.current = newHls();
+    hls.current.attachMedia(audio.current);
 
     await new Promise<void>((resolve) => {
       hls.current!.once(Events.MEDIA_ATTACHED, () => resolve());
@@ -196,12 +199,21 @@ const Player: FC<{
     hls.current.loadSource(audioURI);
 
     await new Promise<void>((resolve) => {
-      hls.current!.once(Events.MANIFEST_LOADED, () => resolve());
+      hls.current!.once(Events.MANIFEST_PARSED, () => resolve());
     });
 
     setDuration(audio.current.duration);
 
     setIsPlay(true);
+  };
+
+  const newHls = () => {
+    const hls = new Hls();
+    hls.on(Events.ERROR, (_, err: ErrorData) => {
+      console.error(err);
+    });
+
+    return hls;
   };
 
   if (audioURI !== "") {
