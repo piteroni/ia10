@@ -34,7 +34,7 @@ const Works: NextPage<{ works: ApiResponse }> = ({ works }) => {
               key={work.name}
               className="mb-10 mx-8"
               style={{ cursor: "pointer" }}
-              onClick={() => setWork(work)}
+              onClick={() => setWork({ ...work })}
             >
               <img
                 width="250px"
@@ -171,18 +171,20 @@ const Player: FC<{
       throw new Error("audio ref or hls ref not initiliazed");
     }
 
+    setIsPlay(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setVolume(1);
+    setIsMute(false);
+    setShowVolume(false);
+    setMarks({});
+
+    audio.current.pause();
+    audio.current.currentTime = 0;
+
     if (hls.current.media) {
-      audio.current.pause();
-      audio.current.currentTime = 0;
-
-      setDuration(0);
-
       hls.current.stopLoad();
       hls.current.detachMedia();
-
-      await new Promise<void>((resolve) => {
-        hls.current!.once(Events.MEDIA_DETACHED, () => resolve());
-      });
     }
 
     hls.current.attachMedia(audio.current!);
@@ -235,7 +237,7 @@ const Player: FC<{
 
         <div className="flex justify-center items-center">
           <Slider
-            className="mr-8 mb-6"
+            className="mr-4 mb-6"
             min={0}
             max={duration}
             value={currentTime}
