@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  ia10-ui:
+  ui:
     build:
       context: ./packages/ia10-ui
       dockerfile: Dockerfile
@@ -10,9 +10,11 @@ services:
     hostname: ia10-ui
     volumes:
       - ./packages/ia10-ui:/app
-      - ia10_ui_node_modules:/app/node_modules
+      - ui_node_modules:/app/node_modules
     ports:
       - 8100:3000
+    env_file:
+      - packages/ia10-ui/.aws-info
 
 volumes:
-  ia10_ui_node_modules:
+  ui_node_modules:

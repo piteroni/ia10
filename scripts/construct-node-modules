@@ -8,14 +8,14 @@ docker-compose down
 
 (cd packages/ia10-ui && rm -rf node_modules node_modules_tmp)
 
-docker-compose build ia10-ui
+docker-compose build ui
 
-./scripts/attach-ia10-ui <<EOL
+./scripts/attach-ui <<EOL
 yarn
 tar zcvf node_modules_tmp node_modules > /dev/null
 EOL
 
 cd packages/ia10-ui
 
-tar zxvf node_modules_tmp > /dev/null
+tar zxf node_modules_tmp > /dev/null
 rm -rf node_modules_tmp

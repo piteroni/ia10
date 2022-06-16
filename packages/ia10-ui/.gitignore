@@ -33,3 +33,9 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# temporary
+node_modules_tmp
+
+# secret
+.aws-info
