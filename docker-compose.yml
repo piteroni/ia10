@@ -14,7 +14,7 @@ services:
     ports:
       - 8100:3000
     env_file:
-      - packages/ia10-ui/.aws-info
+      - packages/ia10-ui/.external
 
 volumes:
   ui_node_modules:
