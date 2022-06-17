@@ -1,14 +1,13 @@
-import type { NextPage } from "next";
-import { useRef, useState } from "react";
-import { WorkData } from "./state";
+import { FC, useRef, useState } from "react";
+import { WorkData } from "../state";
 
 const initialState: WorkData = {
   title: "",
-  thumbnailURI: "",
-  audioURI: "",
+  thumbnailURL: "",
+  audioURL: "",
 };
 
-const WorksMobileView: NextPage<{ works: WorkData[] }> = ({ works }) => {
+const WorksMobileView: FC<{ works: WorkData[] }> = ({ works }) => {
   const [work, setWork] = useState<WorkData>({ ...initialState });
 
   const audio = useRef<HTMLAudioElement | null>(null);
@@ -32,12 +31,7 @@ const WorksMobileView: NextPage<{ works: WorkData[] }> = ({ works }) => {
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  ></path>
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
               </div>
 
@@ -59,14 +53,14 @@ const WorksMobileView: NextPage<{ works: WorkData[] }> = ({ works }) => {
             return (
               <div
                 key={work.title}
-                className="mt-8 mb-6 ml-8 flex"
+                className="mt-8 ml-8 flex"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   if (!audio.current) {
                     return;
                   }
 
-                  audio.current.src = work.audioURI;
+                  audio.current.src = work.audioURL;
                   audio.current.play();
                 }}
               >
@@ -74,7 +68,7 @@ const WorksMobileView: NextPage<{ works: WorkData[] }> = ({ works }) => {
                   width="144px"
                   height="144px"
                   className="mr-4"
-                  src={work.thumbnailURI}
+                  src={work.thumbnailURL}
                   alt={work.title}
                   style={{ border: "white 2px solid", borderRadius: "5px" }}
                 />
@@ -87,7 +81,7 @@ const WorksMobileView: NextPage<{ works: WorkData[] }> = ({ works }) => {
           })}
       </div>
 
-      <audio ref={audio}></audio>
+      <audio ref={audio} hidden></audio>
     </>
   );
 };

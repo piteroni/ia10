@@ -1,6 +1,7 @@
-import WorksDesktopView from "@/view/works/DesktopView";
-import WorksMobileView from "@/view/works/ModileView";
-import { WorkData } from "@/view/works/state";
+import { AudioStateContextProvider } from "@/contexts/audioContext/audioState";
+import WorksDesktopView from "@/view/Application/Desktop";
+import WorksMobileView from "@/view/Application/Mobile";
+import { WorkData } from "@/view/Application/state";
 import type { GetServerSideProps, NextPage } from "next";
 
 const Works: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
@@ -8,13 +9,13 @@ const Works: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
   isDesktop,
 }) => {
   return (
-    <>
+    <AudioStateContextProvider>
       {isDesktop ? (
         <WorksDesktopView works={works} />
       ) : (
         <WorksMobileView works={works} />
       )}
-    </>
+    </AudioStateContextProvider>
   );
 };
 

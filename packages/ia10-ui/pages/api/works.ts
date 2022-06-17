@@ -1,8 +1,8 @@
 import { workContentsEndpoint } from "@/endpoints";
-import { WorkData } from "@/view/works/state";
+import { WorkData } from "@/view/Application/state";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-type DataInS3Object = { title: string; id: string };
+type DataInS3Object = Array<{ name: string; id: string; duration: number }>;
 
 export default async function handler(
   _: NextApiRequest,
@@ -10,13 +10,14 @@ export default async function handler(
 ) {
   const response = (await fetch(`${workContentsEndpoint}/works.json`).then(
     (r) => r.json()
-  )) as DataInS3Object[];
+  )) as DataInS3Object;
 
   const works = response.map((data) => {
     return {
-      title: data.title,
-      thumbnailURI: `${workContentsEndpoint}/works/${data.id}/thumbnail.jpeg`,
-      audioURI: `${workContentsEndpoint}/works/${data.id}/audio/audio.m3u8`,
+      title: data.name,
+      duration: data.duration,
+      thumbnailURL: `${workContentsEndpoint}/works/${data.id}/thumbnail.jpeg`,
+      audioURL: `${workContentsEndpoint}/works/${data.id}/audio/audio.m3u8`,
     };
   });
 

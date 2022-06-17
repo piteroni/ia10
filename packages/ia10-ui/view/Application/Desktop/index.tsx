@@ -1,23 +1,23 @@
 import Header from "@/components/Header";
-import type { NextPage } from "next";
-import { useState } from "react";
-import Player from "./DesktopPlayer";
-import { WorkData } from "./state";
+import { FC, useState } from "react";
+import { WorkData } from "../state";
+import Player from "./Player";
 
 const initialState: WorkData = {
   title: "",
-  thumbnailURI: "",
-  audioURI: "",
+  duration: 0,
+  thumbnailURL: "",
+  audioURL: "",
 };
 
-const WorksDesktopView: NextPage<{ works: WorkData[] }> = ({ works }) => {
+const WorksDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
   const [work, setWork] = useState<WorkData>({ ...initialState });
 
   return (
     <>
       <Header>
         <form>
-          <div className="relative ">
+          <div className="relative">
             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -26,12 +26,7 @@ const WorksDesktopView: NextPage<{ works: WorkData[] }> = ({ works }) => {
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </div>
 
@@ -57,13 +52,15 @@ const WorksDesktopView: NextPage<{ works: WorkData[] }> = ({ works }) => {
                 key={work.title}
                 className="mb-10 mx-8"
                 style={{ cursor: "pointer" }}
-                onClick={() => setWork({ ...work })}
+                onClick={() => {
+                  setWork({ ...work });
+                }}
               >
                 <img
                   width="250px"
                   height="250px"
                   className="mb-4"
-                  src={work.thumbnailURI}
+                  src={work.thumbnailURL}
                   alt={work.title}
                   style={{ border: "white 2px solid", borderRadius: "5px" }}
                 />
@@ -76,8 +73,9 @@ const WorksDesktopView: NextPage<{ works: WorkData[] }> = ({ works }) => {
 
         <Player
           title={work.title}
-          audioURI={work.audioURI}
-          thumbnailURI={work.thumbnailURI}
+          duration={work.duration}
+          audioURI={work.audioURL}
+          thumbnailURI={work.thumbnailURL}
         />
       </div>
     </>

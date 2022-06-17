@@ -1,11 +1,11 @@
 const Footer = () => {
   return (
     <div
-      className="w-full flex justify-center items-center"
+      className="w-full flex justify-center items-center bg-black"
       style={{
-        position: "absolute",
         height: "70px",
         bottom: "0",
+        marginTop: "20px",
       }}
     >
       <a

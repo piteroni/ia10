@@ -18,6 +18,7 @@ resource "aws_cloudfront_distribution" "works_cdn" {
       query_string = false
 
       headers = [
+        "Access-Control-Allow-Origin",
         "Access-Control-Request-Headers",
         "Access-Control-Request-Method",
         "Origin"
@@ -37,7 +38,7 @@ resource "aws_cloudfront_distribution" "works_cdn" {
   restrictions {
     geo_restriction {
       restriction_type = "whitelist"
-      locations        = ["JP"]
+      locations = ["US", "CA", "GB", "DE", "JP"]
     }
   }
 
