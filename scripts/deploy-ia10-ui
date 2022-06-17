@@ -4,4 +4,4 @@ set -eu
 
 cd "$(dirname "$(cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd)")"
 
-vercel deploy packages/ia10-ui
+vercel deploy packages/ia10-ui --prod -e NODE_ENV=production

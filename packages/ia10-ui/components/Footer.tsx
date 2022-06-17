@@ -1,19 +1,20 @@
 const Footer = () => {
   return (
     <div
-      className="w-full flex justify-center items-center text-white text-sm"
+      className="w-full flex justify-center items-center"
       style={{
         position: "absolute",
-        height: "110px",
+        height: "70px",
         bottom: "0",
-        borderTop: "solid 1px #fff",
-        boxShadow: "3px 3px 6px 0 rgba(99, 78, 78, 0.2)",
-        zIndex: "-100",
       }}
     >
-      <div>
-        <p className="flex justify-center">© piteroni</p>
-      </div>
+      <a
+        className="flex text-sm justify-center"
+        href="https://github.com/piteroni"
+        style={{ color: "#bbb" }}
+      >
+        @piteroni
+      </a>
     </div>
   );
 };
