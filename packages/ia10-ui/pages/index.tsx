@@ -8,7 +8,13 @@ const Works: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
   isDesktop,
 }) => {
   return (
-    <>{isDesktop ? <WorksDesktopView works={works} /> : <WorksMobileView />}</>
+    <>
+      {isDesktop ? (
+        <WorksDesktopView works={works} />
+      ) : (
+        <WorksMobileView works={works} />
+      )}
+    </>
   );
 };
 

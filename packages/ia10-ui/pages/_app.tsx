@@ -1,13 +1,10 @@
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="relative justify-center h-screen min-h-screen bg-black">
-      <Header />
-
+    <div className="relative justify-center min-h-screen bg-black">
       <Component {...pageProps} />
 
       <Footer />
