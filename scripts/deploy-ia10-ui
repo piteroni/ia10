@@ -4,4 +4,7 @@ set -eu
 
 cd "$(dirname "$(cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd)")"
 
-vercel deploy packages/ia10-ui --prod -e NODE_ENV=production
+# shellcheck disable=SC2155
+readonly CLOUDFRONT_DOMAIN="$(cd infrastructure/configuration && terraform output --json | .cloudfront_domain_name.value)"
+
+vercel deploy packages/ia10-ui --prod -e NODE_ENV=production -e WORK_CONTENT_ENDPOINT="${CLOUDFRONT_DOMAIN}"
