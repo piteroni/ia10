@@ -4,7 +4,7 @@ import Player from "./DesktopPlayer";
 import { WorkData } from "./state";
 
 const initialState: WorkData = {
-  name: "",
+  title: "",
   thumbnailURI: "",
   audioURI: "",
 };
@@ -21,7 +21,7 @@ const WorksDesktopView: NextPage<{ works: WorkData[] }> = ({ works }) => {
         works.map((work) => {
           return (
             <div
-              key={work.name}
+              key={work.title}
               className="mb-10 mx-8"
               style={{ cursor: "pointer" }}
               onClick={() => setWork({ ...work })}
@@ -31,18 +31,18 @@ const WorksDesktopView: NextPage<{ works: WorkData[] }> = ({ works }) => {
                 height="250px"
                 className="mb-4"
                 src={work.thumbnailURI}
-                alt={work.name}
+                alt={work.title}
                 style={{ border: "white 2px solid", borderRadius: "5px" }}
               />
               <div className="font-bold" style={{ color: "white" }}>
-                {work.name}
+                {work.title}
               </div>
             </div>
           );
         })}
 
       <Player
-        title={work.name}
+        title={work.title}
         audioURI={work.audioURI}
         thumbnailURI={work.thumbnailURI}
       />

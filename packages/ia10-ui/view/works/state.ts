@@ -1,5 +1,5 @@
 export type WorkData = {
-  name: string;
+  title: string;
   thumbnailURI: string;
   audioURI: string;
 };

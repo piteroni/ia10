@@ -161,6 +161,7 @@ const Player: FC<{
   if (audioURI !== "") {
     return (
       <div
+        className="bg-black"
         style={{
           width: "460px",
           padding: "25px 30px 25px 40px",
@@ -170,6 +171,7 @@ const Player: FC<{
           bottom: "50px",
           boxShadow:
             "rgba(255, 255, 255, 0.2) 0px 0px 7px, rgba(255, 255, 255, 0.15) 0px 1px 3px 1px",
+          zIndex: "100",
         }}
       >
         <div className="mb-4 flex items-center">
