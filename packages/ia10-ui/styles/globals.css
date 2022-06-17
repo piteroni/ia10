@@ -15,6 +15,10 @@ a {
   box-sizing: border-box;
 }
 
+/* rc slider */
+@import "rc-slider/assets";
+
+/* tailwind css */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
