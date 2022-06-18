@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div
-      className="w-full flex justify-center items-center bg-black"
+      className="w-full flex justify-center items-center bg-black md:absolute"
       style={{
         height: "70px",
         bottom: "0",

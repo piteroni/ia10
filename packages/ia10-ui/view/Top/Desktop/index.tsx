@@ -10,7 +10,7 @@ const initialState: WorkData = {
   audioURL: "",
 };
 
-const WorksDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
+const TopDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
   const [work, setWork] = useState<WorkData>({ ...initialState });
 
   return (
@@ -82,4 +82,4 @@ const WorksDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
   );
 };
 
-export default WorksDesktopView;
+export default TopDesktopView;

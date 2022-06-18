@@ -1,19 +1,19 @@
 import { AudioStateContextProvider } from "@/contexts/audioContext/audioState";
-import WorksDesktopView from "@/view/Application/Desktop";
-import WorksMobileView from "@/view/Application/Mobile";
-import { WorkData } from "@/view/Application/state";
+import TopDesktopView from "@/view/Top/Desktop";
+import TopMobileView from "@/view/Top/Mobile";
+import { WorkData } from "@/view/Top/state";
 import type { GetServerSideProps, NextPage } from "next";
 
-const Works: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
+const Top: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
   works,
   isDesktop,
 }) => {
   return (
     <AudioStateContextProvider>
       {isDesktop ? (
-        <WorksDesktopView works={works} />
+        <TopDesktopView works={works} />
       ) : (
-        <WorksMobileView works={works} />
+        <TopMobileView works={works} />
       )}
     </AudioStateContextProvider>
   );
@@ -47,4 +47,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   return { props: { works: data, isDesktop } };
 };
 
-export default Works;
+export default Top;

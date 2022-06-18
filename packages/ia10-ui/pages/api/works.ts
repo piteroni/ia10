@@ -1,5 +1,5 @@
 import { workContentsEndpoint } from "@/endpoints";
-import { WorkData } from "@/view/Application/state";
+import { WorkData } from "@/view/Top/state";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type DataInS3Object = Array<{ name: string; id: string; duration: number }>;
