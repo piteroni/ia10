@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   const server =
     process.env.NODE_ENV !== "production"
-      ? `http://host.docker.internal:8100`
+      ? `http://host.docker.internal:3000`
       : `https://${req.headers.host}`;
 
   const response = await fetch(`${server}/api/works`);

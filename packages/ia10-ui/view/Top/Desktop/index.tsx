@@ -32,9 +32,7 @@ const TopDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
 
             <input
               type="search"
-              id="default-search"
               className="block py-3 pl-10 w-96 text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="search by title"
               style={{ backgroundColor: "#212121", color: "white" }}
             />
           </div>

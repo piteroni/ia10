@@ -12,7 +12,7 @@ services:
       - ./packages/ia10-ui:/app
       - ui_node_modules:/app/node_modules
     ports:
-      - 8100:3000
+      - 3000:3000
 
 volumes:
   ui_node_modules:

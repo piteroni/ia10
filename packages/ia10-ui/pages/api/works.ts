@@ -8,9 +8,21 @@ export default async function handler(
   _: NextApiRequest,
   res: NextApiResponse<WorkData[]>
 ) {
-  const response = (await fetch(`${workContentsEndpoint}/works.json`).then(
-    (r) => r.json()
-  )) as DataInS3Object;
+  let response: DataInS3Object;
+
+  try {
+    response = (await fetch(`${workContentsEndpoint}/works.json`).then((r) =>
+      r.json()
+    )) as DataInS3Object;
+  } catch (e) {
+    const payload = await fetch(`${workContentsEndpoint}/works.json`).then(
+      (r) => r.text()
+    );
+
+    throw new Error(
+      `failed fatch works.json, message = ${e} payload = ${payload}`
+    );
+  }
 
   const works = response.map((data) => {
     return {

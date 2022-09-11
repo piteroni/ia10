@@ -19,6 +19,7 @@ const Player: FC<{
     source,
     play,
     initialize,
+    setupHls,
     updateCurrentTime,
     setDuration
   } = useAudioState();
@@ -47,7 +48,9 @@ const Player: FC<{
       return;
     }
 
-    initialize(audio.current).then(async () => {
+    initialize();
+
+    setupHls(audio.current).then(async () => {
       source.current!.loadSource(audioURI);
 
       await new Promise<void>((resolve) => {

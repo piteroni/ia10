@@ -4,6 +4,6 @@ variable "s3_bucket_name" {
 }
 
 variable "allow_origins" {
-  type      = list(any)
+  type      = list(string)
   sensitive = true
 }

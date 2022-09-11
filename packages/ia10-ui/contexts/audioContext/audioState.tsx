@@ -20,7 +20,8 @@ type AudioStateContextValue = {
   updateCurrentTime: (value: number) => void;
   updateVolume: (value: number) => void;
   setDuration: (value: number) => void;
-  initialize: (audio: HTMLAudioElement) => Promise<void>;
+  initialize: () => void;
+  setupHls: (audio: HTMLAudioElement) => Promise<void>;
 };
 
 const AudioStateContext = createContext<AudioStateContextValue>({
@@ -35,6 +36,7 @@ const AudioStateContext = createContext<AudioStateContextValue>({
   updateVolume: () => {},
   setDuration: () => {},
   initialize: async () => {},
+  setupHls: async () => {},
 });
 
 export const AudioStateContextProvider: FC<{ children: ReactNode }> = ({
@@ -52,15 +54,17 @@ export const AudioStateContextProvider: FC<{ children: ReactNode }> = ({
   const updateCurrentTime = (value: number) => setCurrentTime(value);
   const updateVolume = (value: number) => setVolume(value);
 
-  const initialize = async (audio: HTMLAudioElement) => {
-    if (!source.current) {
-      throw new Error("source ref not initiliazed");
-    }
-
+  const initialize = () => {
     setIsPlay(false);
     setCurrentTime(0);
     setDuration(0);
     setVolume(1);
+  };
+
+  const setupHls = async (audio: HTMLAudioElement) => {
+    if (!source.current) {
+      throw new Error("source ref not initiliazed");
+    }
 
     if (source.current.media) {
       source.current.media.pause();
@@ -97,6 +101,7 @@ export const AudioStateContextProvider: FC<{ children: ReactNode }> = ({
         updateVolume,
         setDuration,
         initialize,
+        setupHls,
       }}
     >
       {children}
