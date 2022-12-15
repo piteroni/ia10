@@ -32,24 +32,19 @@ const TopDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
 
             <input
               type="search"
-              className="block py-3 pl-10 w-96 text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              style={{ backgroundColor: "#212121", color: "white" }}
+              className="block py-3 pl-10 w-96 text-sm bg-[#212121] text-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
         </form>
       </Header>
 
-      <div
-        className="lg:container mx-auto py-16 flex flex-wrap"
-        style={{ color: "white" }}
-      >
+      <div className="lg:container mx-auto py-16 flex flex-wrap text-white">
         {works &&
           works.map((work) => {
             return (
               <div
                 key={work.title}
-                className="mb-10 mx-8"
-                style={{ cursor: "pointer" }}
+                className="mb-10 mx-8 cursor-pointer"
                 onClick={() => {
                   setWork({ ...work });
                 }}
@@ -57,14 +52,11 @@ const TopDesktopView: FC<{ works: WorkData[] }> = ({ works }) => {
                 <img
                   width="250px"
                   height="250px"
-                  className="mb-4"
+                  className="mb-4 border-2 border-white rounded-[5px]"
                   src={work.thumbnailURL}
                   alt={work.title}
-                  style={{ border: "white 2px solid", borderRadius: "5px" }}
                 />
-                <div className="font-bold" style={{ color: "white" }}>
-                  {work.title}
-                </div>
+                <div className="font-bold text-white">{work.title}</div>
               </div>
             );
           })}

@@ -2,6 +2,7 @@ import TopDesktopView from "@/components/pages/top/desktop";
 import TopMobileView from "@/components/pages/top/mobile";
 import { WorkData } from "@/components/pages/top/state";
 import { AudioStateContextProvider } from "@/contexts/audioContext/audioState";
+import { getIsDesktop } from "@/shared";
 import type { GetServerSideProps, NextPage } from "next";
 
 const Top: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
@@ -20,21 +21,7 @@ const Top: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const isDesktop = ((userAgent?: string) => {
-    if (!userAgent) {
-      return false;
-    }
-
-    const nonDesktopDevices = ["iphone", "ipod", "android", "mobile", "ipad"];
-
-    for (const device of nonDesktopDevices) {
-      if (userAgent.toLowerCase().indexOf(device) > 0) {
-        return false;
-      }
-    }
-
-    return true;
-  })(req.headers["user-agent"]);
+  const isDesktop = getIsDesktop(req.headers["user-agent"]);
 
   const server =
     process.env.NODE_ENV !== "production"

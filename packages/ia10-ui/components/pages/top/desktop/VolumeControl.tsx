@@ -24,8 +24,7 @@ const VolumeControl: FC = () => {
 
   return (
     <div
-      className="mr-2"
-      style={{ cursor: "pointer" }}
+      className="mr-2 cursor-pointer"
       onMouseEnter={() => setShowVolume(true)}
       onMouseLeave={() => setShowVolume(false)}
     >
@@ -63,6 +62,7 @@ const VolumeControl: FC = () => {
 
       {/* キモすぎる何か */}
       <div
+        className="absolute w-[35px] h-[90px] top-[25px] right-[65px]"
         onClick={() => {
           if (!isMute) {
             updateVolume(0);
@@ -72,30 +72,11 @@ const VolumeControl: FC = () => {
             setIsMute(false);
           }
         }}
-        style={{
-          position: "absolute",
-          top: "25px",
-          right: "65px",
-          height: "90px",
-          width: "35px",
-        }}
       />
 
       {/* volume controller */}
       {showVolume && (
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "70px",
-            height: "90px",
-            padding: "5px",
-            borderRadius: "7px",
-            backgroundColor: "black",
-            boxShadow:
-              "rgba(255, 255, 255, 0.2) 0px 0px 7px, rgba(255, 255, 255, 0.15) 0px 1px 3px 1px",
-          }}
-        >
+        <div className="absolute h-[90px] top-[20px] right-[70px] p-[5px] bg-black rounded-[7px] shadow-[rgba(255,255,255,0.2)_0_0_7px,rgba(255,255,255,0.15)_0_1px_3px_1px]">
           <Slider
             vertical={true}
             min={0}

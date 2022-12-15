@@ -11,17 +11,11 @@ const WorkInfo: FC<Props> = ({ title, thumbnailURI }) => {
       <img
         width="72px"
         height="72px"
-        className="mr-4"
+        className="mr-4 border-2 border-white rounded-[5px]"
         src={thumbnailURI}
         alt={title}
-        style={{
-          border: "white 2px solid",
-          borderRadius: "5px",
-        }}
       />
-      <div className="font-bold" style={{ color: "white" }}>
-        {title}
-      </div>
+      <div className="font-bold text-white">{title}</div>
     </div>
   );
 };

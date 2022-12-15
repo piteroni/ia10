@@ -65,20 +65,7 @@ const Player: FC<{
 
   if (audioURI !== "") {
     return (
-      <div
-        className="bg-black"
-        style={{
-          width: "460px",
-          padding: "25px 30px 25px 40px",
-          borderRadius: "10px",
-          position: "absolute",
-          right: "50px",
-          bottom: "50px",
-          boxShadow:
-            "rgba(255, 255, 255, 0.2) 0px 0px 7px, rgba(255, 255, 255, 0.15) 0px 1px 3px 1px",
-          zIndex: "100",
-        }}
-      >
+      <div className="absolute bg-black w-[460px] py-[25px] pr-[30px] pl-[40px] rounded-[10px] right-[50px] bottom-[50px] z-50 shadow-[rgba(255,255,255,0.2)_0_0_7px,rgba(255,255,255,0.15)_0_1px_3px_1px]">
         <WorkInfo thumbnailURI={thumbnailURI} title={title} />
 
         <div className="flex justify-center items-center">

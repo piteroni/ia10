@@ -2,7 +2,7 @@ import { useAudioState } from "@/contexts/audioContext/audioState";
 import { FC, useEffect } from "react";
 
 const PlaybackControl: FC = () => {
-  const { isPlay, play, pause, source } = useAudioState();
+  const { isPlay, source, play, pause } = useAudioState();
 
   useEffect(() => {
     if (!source.current || !source.current.media) {
@@ -21,7 +21,7 @@ const PlaybackControl: FC = () => {
   }, [isPlay]);
 
   return (
-    <div style={{ cursor: "pointer" }}>
+    <div className="cursor-pointer">
       {isPlay ? (
         // pause button
         <div onClick={() => pause()}>
