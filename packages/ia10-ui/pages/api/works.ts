@@ -9,7 +9,7 @@ export default async function handler(
   res: NextApiResponse<WorkData[]>
 ) {
   const response = await fetch(`${workContentsEndpoint}/works.json`)
-    .then((response) => response.json() as unknown as DataInS3Object)
+    .then<DataInS3Object>((response) => response.json())
     .catch((e) => {
       throw new Error(`failed fatch works.json, reason = ${e}`);
     });
