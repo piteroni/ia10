@@ -1,5 +1,5 @@
+import { WorkData } from "@/components/pages/top/state";
 import { workContentsEndpoint } from "@/endpoints";
-import { WorkData } from "@/view/Top/state";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type DataInS3Object = Array<{ name: string; id: string; duration: number }>;
@@ -8,21 +8,11 @@ export default async function handler(
   _: NextApiRequest,
   res: NextApiResponse<WorkData[]>
 ) {
-  let response: DataInS3Object;
-
-  try {
-    response = (await fetch(`${workContentsEndpoint}/works.json`).then((r) =>
-      r.json()
-    )) as DataInS3Object;
-  } catch (e) {
-    const payload = await fetch(`${workContentsEndpoint}/works.json`).then(
-      (r) => r.text()
-    );
-
-    throw new Error(
-      `failed fatch works.json, message = ${e} payload = ${payload}`
-    );
-  }
+  const response = await fetch(`${workContentsEndpoint}/works.json`)
+    .then((response) => response.json() as unknown as DataInS3Object)
+    .catch((e) => {
+      throw new Error(`failed fatch works.json, reason = ${e}`);
+    });
 
   const works = response.map((data) => {
     return {
