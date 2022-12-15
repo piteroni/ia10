@@ -1,7 +1,7 @@
+import TopDesktopView from "@/components/pages/top/desktop";
+import TopMobileView from "@/components/pages/top/mobile";
+import { WorkData } from "@/components/pages/top/state";
 import { AudioStateContextProvider } from "@/contexts/audioContext/audioState";
-import TopDesktopView from "@/view/Top/Desktop";
-import TopMobileView from "@/view/Top/Mobile";
-import { WorkData } from "@/view/Top/state";
 import type { GetServerSideProps, NextPage } from "next";
 
 const Top: NextPage<{ works: WorkData[]; isDesktop: boolean }> = ({

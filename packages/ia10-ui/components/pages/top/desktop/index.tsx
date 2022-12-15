@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/parts/Header";
 import { FC, useState } from "react";
 import { WorkData } from "../state";
 import Player from "./Player";

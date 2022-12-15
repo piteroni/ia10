@@ -85,7 +85,7 @@ const TopMobileView: FC<{ works: WorkData[] }> = ({ works }) => {
                       height="14px"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      stroke-width="1"
+                      strokeWidth="1"
                     >
                       <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -101,7 +101,7 @@ const TopMobileView: FC<{ works: WorkData[] }> = ({ works }) => {
                       height="14px"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      stroke-width="1"
+                      strokeWidth="1"
                     >
                       <path
                         strokeLinecap="round"

@@ -10,7 +10,7 @@ docker-compose down
 
 docker-compose build ui
 
-./scripts/attach-ui <<EOL
+OPTS=-T ./scripts/attach-ui <<EOL
 yarn
 tar zcvf node_modules_tmp node_modules > /dev/null
 EOL
